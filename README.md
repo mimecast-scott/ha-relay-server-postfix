@@ -37,7 +37,7 @@ systemctl enable postfix
 systemctl restart postfix
 ````
 
-You should now be able to telnet to localhost:25 and be served with a SMTP banner.
+You should now be able to telnet to localhost:2525 and be served with a SMTP banner.
 
 # Step 3 - Configure HAproxy
 HAProxy is a powerful open-source load balancer. The configuration file is stored in `/etc/haproxy/haproxy.cfg`
@@ -62,4 +62,4 @@ systemctl restart keepalived
 
 # Final step - Mimecast (if using Mimecast as smart host)
 
-In order to relay outbound via Mimecast, you will need to ensure your WAN IP address that SMTP egresses from is added to the Authorized Outbound IP configuration. This can be a single IP or CIDR netblock.
+In order to relay outbound via Mimecast, you will need to ensure your WAN IP address or subnet that SMTP egresses from is added to the `Authorized Outbound IP` configuration. This can be a single IP or CIDR netblock.
