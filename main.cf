@@ -35,7 +35,7 @@ smtpd_tls_security_level = may
 smtpd_tls_cert_file = /etc/ssl/certs/your_cert.pem
 smtpd_tls_key_file = /etc/ssl/private/your_key_nopass.pem
 smtpd_tls_received_header = yes
-smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, TLSv1.2, !TLSv1.3
+smtpd_tls_protocols = !SSLv2, !SSLv3, !TLSv1, TLSv1.2, TLSv1.3
 smtpd_tls_mandatory_exclude_ciphers = aNULL, eNULL, EXPORT, DES, 3DES, RC4, MD5, PSK, SRP, DSS
 smtpd_tls_session_cache_database = btree:/etc/postfix/data/smtpd_scache
 # HAproxy - support 'proxy protocol' for incoming connections from a Load Balancer
