@@ -6,13 +6,13 @@ This setup provides a highly available on-premise (or cloud hosted) SMTP relay w
 # Architecture
 In this setup, we will use `keepalived` to provide High Availability (HA) between two Debian hosts running `haproxy` listening on TCP/25 and postfix listening on TCP/2525. `keepalived` uses VRRP, where each host will have their own IP on each interface, and a floating IP address will be shared between the two hosts in active/standby configuration. 
 
-While `keepalived` will be on each host will be active or standby, the postfix MTA on each host will send mail in active/active configuration via `haproxy` which will monitor the health of each `postfix` instance via `option smtpchk HELO localhost` in the `haproxy` configuration.
+While `keepalived` on each host will float and IP in active/standby, the postfix MTA on each host will send mail in active/active configuration via `haproxy` which will monitor the health of each `postfix` instance via `option smtpchk HELO localhost` in the `haproxy` configuration.
 
-`haproxy` is an open-source load balancer application that supports TCP load balancing. `haproxy` will run on both hosts listening on TCP/2525 and load-balance traffic evenly to the two postfix MTA (regardless of which host is active from a `keepalived`/VRRP point of view) listening on port TCP/25
+`haproxy` is an open-source load balancer application that supports TCP load balancing. `haproxy` will run on both hosts listening on TCP/25 and load-balance traffic evenly to the two postfix MTA (regardless of which host is active from a `keepalived`/VRRP point of view).
 
-`postfix` will be configured to accept unauthenticated SMTP relay in plain-text from specific LAN networks e.g. 192.168.0.0/23 without SASL authentication.
+`postfix` will be configured to accept unauthenticated SMTP relay in plain-text or TLS(opportunistic TLS) from specific LAN networks e.g. 192.168.0.0/23 without SASL authentication.
 
-This specific configuration was test on two debian 11 hosts.
+This specific configuration was tested on two debian 11 hosts.
 
 # Step 1 - Install the software
 The first thing to do is install `postfix` on your hosts - you can do this on both hosts or after install clone the VM. To install the required software run:
