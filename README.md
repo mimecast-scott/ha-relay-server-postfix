@@ -4,7 +4,7 @@
 This setup provides a highly available on-premise (or cloud hosted) SMTP relay where mail can be received without TLS (based on this configuration,for legacy applications) and enforced TLS (1.3) over the internet to Mimecast smarthosts.
 
 # Architecture
-In this setup, we will use `keepalived` to provide High Availability (HA) between two Debian hosts running `haproxy` listening on TCP/2525 and postfix listening on TCP/25. `keepalived` uses VRRP, where each host will have their own IP on each interface, and a floating IP address will be shared between the two hosts in active/standby configuration. 
+In this setup, we will use `keepalived` to provide High Availability (HA) between two Debian hosts running `haproxy` listening on TCP/25 and postfix listening on TCP/2525. `keepalived` uses VRRP, where each host will have their own IP on each interface, and a floating IP address will be shared between the two hosts in active/standby configuration. 
 
 While `keepalived` will be on each host will be active or standby, the postfix MTA on each host will send mail in active/active configuration via `haproxy` which will monitor the health of each `postfix` instance via `option smtpchk HELO localhost` in the `haproxy` configuration.
 
